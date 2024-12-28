@@ -1,0 +1,73 @@
+/sign_language_translator
+    /frontend
+        /public
+            - index.html
+            - translate.html
+            - styles.css
+            - translate-styles.css
+            - script.js
+            - translate-script.js
+    /backend
+        /python
+            - collect_images.py       # For collecting training images
+            - create_dataset.py       # For creating the dataset from images
+            - trainclassifier.py      # For training the model
+            - inferenceclassifier.py  # For real-time inference
+            /data                     # Directory for storing training images
+                /0  # hello
+                /1  # eat
+                /2  # yes
+                /3  # thank you
+                /4  # i love you
+                /5  # friends
+            /models
+                - data.pickle         # Generated dataset
+                - model.p             # Trained model
+        /server
+            - app.py                  # Flask server
+            - server.js               # Express server
+        /requirements
+            - requirements.txt        # Python dependencies
+            - package.json           # Node.js dependencies
+
+# Setup instructions:
+
+1. Install Python dependencies:
+```bash
+cd backend
+pip install -r requirements/requirements.txt
+```
+
+2. Install Node.js dependencies:
+```bash
+cd backend/server
+npm install
+```
+
+3. Training pipeline:
+```bash
+cd backend/python
+
+# Step 1: Collect images (if not using existing dataset)
+python collect_images.py
+
+# Step 2: Create dataset
+python create_dataset.py
+
+# Step 3: Train classifier
+python trainclassifier.py
+```
+
+4. Start servers:
+```bash
+# Terminal 1 - Start Flask server
+cd backend/server
+python app.py
+
+# Terminal 2 - Start Express server
+cd backend/server
+node server.js
+```
+
+5. Access frontend:
+Open frontend/public/index.html in a web browser
